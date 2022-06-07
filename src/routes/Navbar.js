@@ -1,4 +1,4 @@
-import App from "./App";
+import App from "../App";
 
 const Navbar = () => {
   return <h1>To-Learn List</h1>;
