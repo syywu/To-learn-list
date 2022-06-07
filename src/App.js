@@ -8,6 +8,9 @@ import Listitems from "./components/ListItems";
 function App() {
   return (
     <div className="App">
+      <div className="component">
+        <h1>To-learn list</h1>
+      </div>
       <List>
         <Listitems text="React" />
         <Listitems text="Firebase" />
