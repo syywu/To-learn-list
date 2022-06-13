@@ -1,6 +1,4 @@
-function Listitems(props) {
-  const text = props.text;
-
+function Listitems({ text }) {
   return (
     <div className="list-itmes">
       <li>{text}</li>
