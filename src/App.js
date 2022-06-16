@@ -1,8 +1,7 @@
 import Home from "../src/routes/Home";
-import List from "./components/List";
-import Listitems from "./components/ListItems";
 import Navbar from "./routes/Navbar";
 import "./App.css";
+import Create from "./routes/Create";
 
 function App() {
   return (
@@ -10,7 +9,7 @@ function App() {
       <Navbar />
       <div className="component">
         <Home />
-        <List />
+        <Create />
       </div>
     </div>
   );
