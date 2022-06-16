@@ -1,6 +1,4 @@
-function List(props) {
-  const title = props.title;
-  const children = props.children;
+function List({ children, title }) {
   return (
     <div className="list">
       <h2>{title}</h2>

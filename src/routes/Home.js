@@ -1,17 +1,17 @@
-import List from "tar/lib/list";
+import List from "../components/List";
 import Listitems from "../components/ListItems";
 
 const Home = () => {
-  const [listItem, setListItem] = setState("");
+  // const [listItem, setListItem] = setState("");
 
-  function handleChange(e) {
-    setListItem(e.target.value);
-  }
+  // function handleChange(e) {
+  //   setListItem(e.target.value);
+  // }
   return (
     <div className="homepage">
-      <h2>Homepage</h2>
+      <h2>My Study List</h2>
       <List title="Things I need to learn">
-        <Listitems text={listItem} />
+        <Listitems />
       </List>
     </div>
   );
