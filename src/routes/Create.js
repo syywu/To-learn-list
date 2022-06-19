@@ -1,10 +1,7 @@
-import { setState } from "react";
-const Create = ({ handleSubmit }) => {
-  const [subject, setSubject] = setState();
+import { useState } from "react";
 
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
+const Create = ({ handleSubmit }) => {
+  const [subject, setSubject] = useState();
 
   return (
     <div className="create">

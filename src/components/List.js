@@ -1,8 +1,10 @@
-function List({ children, title }) {
+import Listitems from "./ListItems";
+function List({ title, subjects, handleDelete }) {
   return (
     <div className="list">
-      <h2>{title}</h2>
-      <ul>{children}</ul>;
+      <h1>{title}</h1>
+      <ul>{subjects}</ul>
+      <button onClick={handleDelete}>Done</button>
     </div>
   );
 }
