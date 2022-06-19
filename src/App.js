@@ -15,7 +15,7 @@ function App() {
   }
 
   function handleDelete(id) {
-    const newList = listItem.filter((item) => item.id != id);
+    const newList = listItem.filter((item) => item.id !== id);
     setListItem(newList);
   }
 
