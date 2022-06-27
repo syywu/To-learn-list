@@ -3,6 +3,7 @@ import cors from "cors";
 import logger from "morgan";
 import router from "./routes/user.js";
 import { auth } from "express-openid-connect";
+import { requiresAuth } from "express-openid-connect";
 
 const PORT = process.env.PORT;
 const app = express();
@@ -25,6 +26,11 @@ app.use(auth(config));
 // req.isAuthenticated is provided from the auth router
 app.get("/", (req, res) => {
   res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
+});
+
+// requiresAuth middleware for routes that require authentication- check for a valid user session
+app.get("/profile", requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
 });
 
 app.listen(PORT, () => {
