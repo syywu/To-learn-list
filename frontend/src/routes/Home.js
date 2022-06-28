@@ -1,6 +1,7 @@
 import List from "../components/List";
 import Listitems from "../components/ListItems";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -21,7 +22,7 @@ const Home = () => {
   return (
     isAuthenticated && (
       <div className="homepage">
-        <h2>`{user.given_name}'s study list'`</h2>
+        <h2>{user.given_name}'s study list</h2>
         <List title="Things I need to learn" handleDelete={handleDelete}>
           <Listitems />
         </List>
