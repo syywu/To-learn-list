@@ -17,5 +17,5 @@ import { query } from "../db/index.js";
 
 // get user
 async function getUser(email) {
-  // email needs to match
+  // subject needs to match
 }
