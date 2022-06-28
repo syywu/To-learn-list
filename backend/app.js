@@ -2,7 +2,9 @@ import express from "express";
 import cors from "cors";
 import logger from "morgan";
 import router from "./routes/user.js";
-import { auth, requiresAuth } from "express-openid-connect";
+import { auth } from "express-openid-connect";
+import pkg from "express-openid-connect";
+const { requiresAuth } = pkg;
 
 const PORT = process.env.PORT;
 const app = express();

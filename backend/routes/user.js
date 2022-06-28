@@ -1,13 +1,11 @@
 import express from "express";
 const router = express.Router();
 
-// isAuthenticated
-router.get("/", (req, res) => {
-  res.render({ isAuthenticated: req.oidc.isAuthenticated() });
-});
-
 // get user's personal list
-router.get("/:id", async (req, res) => {});
+router.get("/:id", async (req, res) => {
+  if (req.oidc.user) {
+  }
+});
 
 // allow user to post
 
