@@ -18,6 +18,8 @@ const config = {
 
 app.use(cors());
 app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/user", router);
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
@@ -28,7 +30,7 @@ app.get("/", (req, res) => {
 });
 
 // requiresAuth middleware for routes that require authentication- check for a valid user session
-app.get("/profile", requiresAuth(), (req, res) => {
+app.get("/user", requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
 
