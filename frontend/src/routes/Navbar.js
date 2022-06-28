@@ -1,3 +1,6 @@
+import LoginButton from "../components/Login";
+import LogoutButton from "../components/Logout";
+
 const Navbar = () => {
   return (
     <nav className="nav-bar">
@@ -5,6 +8,8 @@ const Navbar = () => {
       <div className="links">
         <a href="/">Home</a>
         <a href="/create">Create</a>
+        <LoginButton />
+        <LogoutButton />
       </div>
     </nav>
   );

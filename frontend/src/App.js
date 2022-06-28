@@ -11,8 +11,6 @@ function App() {
     <Router>
       <div className="root">
         <Navbar />
-        <LoginButton />
-        <LogoutButton />
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />}></Route>
