@@ -14,6 +14,8 @@ root.render(
     domain={authDomain}
     clientId={authClientID}
     redirectUri={window.location.origin}
+    audience="https://syywu-projects.eu.auth0.com/api/v2/"
+    scope="read:current_user update:current_user_metadata"
   >
     <App />
   </Auth0Provider>
