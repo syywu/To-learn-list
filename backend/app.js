@@ -4,11 +4,25 @@ import logger from "morgan";
 import router from "./routes/user.js";
 import { auth as openidAuth } from "express-openid-connect";
 import pkg from "express-openid-connect";
+import jwt from "express-jwt";
+import jwksfrom from "jwks-rsa";
 const { requiresAuth } = pkg;
 const { auth } = "express-oauth2-jwt-bearer";
 
 const PORT = process.env.PORT;
 const app = express();
+
+var jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: "https://syywu-projects.eu.auth0.com/.well-known/jwks.json",
+  }),
+  audience: "http://localhost:8000",
+  issuer: "https://syywu-projects.eu.auth0.com/",
+  algorithms: ["RS256"],
+});
 
 const config = {
   authRequired: false,
@@ -28,6 +42,7 @@ app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(jwtCheck);
 app.use("/user", router);
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(openidAuth(config));
