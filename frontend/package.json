@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@auth0/auth0-react": "^1.10.2"
+    "@auth0/auth0-react": "^1.10.2",
+    "dotenv": "^16.0.1"
   }
 }
