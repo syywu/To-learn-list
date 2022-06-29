@@ -3,6 +3,7 @@ import Home from "./routes/Home";
 import Create from "./routes/Create";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NotFound from "./routes/NotFound";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/create" element={<Create />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </div>
       </div>

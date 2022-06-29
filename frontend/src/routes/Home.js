@@ -38,6 +38,12 @@ const Home = () => {
     getUserMetadata();
   }, [getAccessTokenSilently, user?.sub]);
 
+  function handleDelete() {
+    fetch(`https://localhost:8000/list` + subject.id, {
+      method: DELETE,
+    });
+  }
+
   return (
     isAuthenticated && (
       <div className="homepage">
@@ -52,7 +58,7 @@ const Home = () => {
         {isPending && <div>Loading..</div>}
         {data && (
           <List title="Things I need to learn" listItem={data}>
-            <Listitem />
+            <Listitem handleDelete={handleDelete} />
           </List>
         )}
       </div>

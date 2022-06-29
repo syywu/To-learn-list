@@ -3,8 +3,8 @@ function List({ listDisplay }) {
   return (
     <div className="list">
       <ol>
-        {listDisplay?.map((item) => {
-          return <Listitem name={item.name} key={item.id} />;
+        {listDisplay?.map((subject) => {
+          return <Listitem name={subject.name} key={subject.id} />;
         })}
       </ol>
     </div>

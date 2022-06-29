@@ -1,10 +1,20 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-const Create = ({ handleSubmit }) => {
+const Create = () => {
   const [subject, setSubject] = useState("");
+  const history = useHistory();
 
-  function handleClick() {
-    setSubject("");
+  function handleSubmit(e) {
+    e.preventDefault();
+    fetch(`https://localhost:8000/list`, {
+      method: POST,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(subject),
+    }).then(() => {
+      console.log("added");
+      history.push("/");
+    });
   }
 
   return (
@@ -18,7 +28,7 @@ const Create = ({ handleSubmit }) => {
           value={subject}
           onChange={(e) => setSubject(e.value.target)}
         />
-        <button onClick={handleClick}>Add subject</button>
+        <button>Add subject</button>
       </form>
     </div>
   );
