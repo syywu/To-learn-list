@@ -1,7 +1,11 @@
 import { useState } from "react";
 
 const Create = ({ handleSubmit }) => {
-  const [subject, setSubject] = useState();
+  const [subject, setSubject] = useState("");
+
+  function handleClick() {
+    setSubject("");
+  }
 
   return (
     <div className="create">
@@ -14,7 +18,7 @@ const Create = ({ handleSubmit }) => {
           value={subject}
           onChange={(e) => setSubject(e.value.target)}
         />
-        <button>Add subject</button>
+        <button onClick={handleClick}>Add subject</button>
       </form>
     </div>
   );

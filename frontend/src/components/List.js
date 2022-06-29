@@ -1,10 +1,12 @@
-import Listitems from "./ListItems";
-function List({ title, subjects, handleDelete }) {
+import Listitem from "./ListItems";
+function List({ listDisplay }) {
   return (
     <div className="list">
-      <h1>{title}</h1>
-      <ul>{subjects}</ul>
-      <button onClick={handleDelete}>Done</button>
+      <ol>
+        {listDisplay?.map((item) => {
+          return <Listitem name={item.name} key={item.id} />;
+        })}
+      </ol>
     </div>
   );
 }

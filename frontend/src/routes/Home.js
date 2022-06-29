@@ -1,17 +1,17 @@
 import List from "../components/List";
-import Listitems from "../components/ListItems";
-import { useState } from "react";
+import Listitem from "../components/ListItems";
+import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userMetadata, setUserMetadata] = useState(null);
 
-  const [listItem, setListItem] = useState([{ id: 1, subject: "react" }]);
+  const [listDisplay, setListDisplay] = useState([{ id: 1, subject: "react" }]);
 
   useEffect(() => {
     const getUserMetadata = async () => {
-      const domain = "syywu-projects.eu.auth0.com";
+      const domain = process.env.REACT_APP_DOMAIN;
 
       try {
         const accessToken = await getAccessTokenSilently({
@@ -38,15 +38,14 @@ const Home = () => {
     getUserMetadata();
   }, [getAccessTokenSilently, user?.sub]);
 
-  function handleSubmit(e, inputValue) {
-    e.preventDefault();
-    let newSubject = { id: listItem.length + 1, subject: inputValue };
-    setListItem([...listItem, newSubject]);
+  function addToList(inputValue) {
+    let newSubject = { id: listDisplay.length + 1, subject: inputValue };
+    setListDisplay([...listDisplay, newSubject]);
   }
 
   function handleDelete(id) {
-    const newList = listItem.filter((item) => item.id !== id);
-    setListItem(newList);
+    const newList = listDisplay.filter((item) => item.id !== id);
+    setListDisplay(newList);
   }
 
   return (
@@ -59,9 +58,15 @@ const Home = () => {
         ) : (
           "No user metadata defined"
         )}
-        <List title="Things I need to learn" handleDelete={handleDelete}>
-          <Listitems />
-        </List>
+        {listDisplay && (
+          <List
+            title="Things I need to learn"
+            listItem={listDisplay}
+            handleDelete={handleDelete}
+          >
+            <Listitem />
+          </List>
+        )}
       </div>
     )
   );
