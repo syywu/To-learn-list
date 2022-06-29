@@ -3,6 +3,7 @@ import Home from "./routes/Home";
 import Create from "./routes/Create";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./auth/protected-route";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/home" element={<Home />}></Route>
+            <ProtectedRoute path="/home" element={<Home />}></ProtectedRoute>
             <Route path="/create" element={<Create />}></Route>
           </Routes>
         </div>
