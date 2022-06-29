@@ -2,23 +2,12 @@ import List from "../components/List";
 import Listitem from "../components/ListItems";
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import useFetch from "../components/useFetch";
 
 const Home = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userMetadata, setUserMetadata] = useState(null);
-  const [listDisplay, setListDisplay] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-
-  useEffect(() => {
-    fetch(`https://localhost:8000/user`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setListDisplay(data);
-        setIsPending(false);
-      });
-  }, []);
+  const { data, isPending, error } = useFetch(`https://localhost:8000/user`);
 
   useEffect(() => {
     const getUserMetadata = async () => {
@@ -49,16 +38,6 @@ const Home = () => {
     getUserMetadata();
   }, [getAccessTokenSilently, user?.sub]);
 
-  function addToList(inputValue) {
-    let newSubject = { id: listDisplay.length + 1, subject: inputValue };
-    setListDisplay([...listDisplay, newSubject]);
-  }
-
-  function handleDelete(id) {
-    const newList = listDisplay.filter((item) => item.id !== id);
-    setListDisplay(newList);
-  }
-
   return (
     isAuthenticated && (
       <div className="homepage">
@@ -69,13 +48,10 @@ const Home = () => {
         ) : (
           "No user metadata defined"
         )}
+        {error && <div>{error}</div>}
         {isPending && <div>Loading..</div>}
-        {listDisplay && (
-          <List
-            title="Things I need to learn"
-            listItem={listDisplay}
-            handleDelete={handleDelete}
-          >
+        {data && (
+          <List title="Things I need to learn" listItem={data}>
             <Listitem />
           </List>
         )}
