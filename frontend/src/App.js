@@ -13,8 +13,11 @@ function App() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <ProtectedRoute path="/home" element={<Home />}></ProtectedRoute>
-            <Route path="/create" element={<Create />}></Route>
+            <Route path="/home" element={<Home />}></Route>
+            <ProtectedRoute
+              path="/create"
+              element={<Create />}
+            ></ProtectedRoute>
           </Routes>
         </div>
       </div>
