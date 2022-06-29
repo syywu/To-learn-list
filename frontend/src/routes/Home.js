@@ -6,8 +6,19 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Home = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userMetadata, setUserMetadata] = useState(null);
+  const [listDisplay, setListDisplay] = useState(null);
+  const [isPending, setIsPending] = useState(true);
 
-  const [listDisplay, setListDisplay] = useState([{ id: 1, subject: "react" }]);
+  useEffect(() => {
+    fetch(`https://localhost:8000/user`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setListDisplay(data);
+        setIsPending(false);
+      });
+  }, []);
 
   useEffect(() => {
     const getUserMetadata = async () => {
@@ -58,6 +69,7 @@ const Home = () => {
         ) : (
           "No user metadata defined"
         )}
+        {isPending && <div>Loading..</div>}
         {listDisplay && (
           <List
             title="Things I need to learn"
