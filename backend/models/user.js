@@ -16,8 +16,9 @@ import { query } from "../db/index.js";
 // when login/register- insert into user table: name, email, sub?
 
 // get user
-async function getUser(email) {
-  // subject needs to match
+export async function getUser() {
+  const res = await query(`SELECT * from list`);
+  return res.rows[0];
 }
 
 export async function postSubject(subject) {
