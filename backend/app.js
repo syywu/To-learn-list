@@ -3,7 +3,7 @@ import cors from "cors";
 import logger from "morgan";
 import router from "./routes/user.js";
 import { auth, requiredScopes } from "express-oauth2-jwt-bearer";
-import { postSubject } from "./models/user.js";
+import { getUser, postSubject } from "./models/user.js";
 const checkScopes = requiredScopes("read:messages");
 const PORT = process.env.PORT;
 const app = express();
@@ -49,6 +49,10 @@ app.get("/user", checkJwt, function (req, res) {
 
 app.post("/user", checkJwt, function (req, res) {
   res.json({success: true, payload: await postSubject(req.body)});
+});
+
+app.delete("/user", checkJwt, function (req, res) {
+  res.json({success: true, payload: await deleteSubject(Number(req.params.id))});
 });
 
 app.listen(PORT, () => {

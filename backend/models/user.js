@@ -25,3 +25,8 @@ export async function postSubject(subject) {
   const res = await query(`INSERT INTO list (subject) VALUES ($1)`, [subject]);
   return res.rows;
 }
+
+export async function deleteSubject(id) {
+  const res = await query(`DELETE FROM list WHERE id = $1`, [id]);
+  return res.rows;
+}
