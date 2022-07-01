@@ -19,3 +19,8 @@ import { query } from "../db/index.js";
 async function getUser(email) {
   // subject needs to match
 }
+
+export async function postSubject(subject) {
+  const res = await query(`INSERT INTO list (subject) VALUES ($1)`, [subject]);
+  return res.rows;
+}

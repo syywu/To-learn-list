@@ -7,7 +7,11 @@ import useFetch from "../components/useFetch";
 const Home = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [userMetadata, setUserMetadata] = useState(null);
-  const { data, isPending, error } = useFetch(`https://localhost:8000/user`);
+  const {
+    data: subject,
+    isPending,
+    error,
+  } = useFetch(`https://localhost:8000/user`);
 
   useEffect(() => {
     const getUserMetadata = async () => {
@@ -39,8 +43,8 @@ const Home = () => {
   }, [getAccessTokenSilently, user?.sub]);
 
   function handleDelete() {
-    fetch(`https://localhost:8000/list` + subject.id, {
-      method: DELETE,
+    fetch(`https://localhost:8000/user` + subject.id, {
+      method: "DELETE",
     });
   }
 
@@ -56,8 +60,8 @@ const Home = () => {
         )}
         {error && <div>{error}</div>}
         {isPending && <div>Loading..</div>}
-        {data && (
-          <List title="Things I need to learn" listItem={data}>
+        {subject && (
+          <List title="Things I need to learn" listItem={subject}>
             <Listitem handleDelete={handleDelete} />
           </List>
         )}

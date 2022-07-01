@@ -1,19 +1,19 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [subject, setSubject] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
     fetch(`https://localhost:8000/list`, {
-      method: POST,
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(subject),
     }).then(() => {
       console.log("added");
-      history.push("/");
+      navigate("/");
     });
   }
 
@@ -26,7 +26,7 @@ const Create = () => {
           type="text"
           required
           value={subject}
-          onChange={(e) => setSubject(e.value.target)}
+          onChange={(e) => setSubject(e.target.value)}
         />
         <button>Add subject</button>
       </form>
